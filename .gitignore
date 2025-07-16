@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+
+# Virtual environments
+venv/
+.env
+
+# Django stuff
+*.log
+*.pot
+*.pyc
+db.sqlite3
+
+# IDE
+.vscode/
+.idea/
+
+# Docker
+*.pid
+*.seed
+*.egg-info/
+*.egg
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*$py.class
