@@ -15,8 +15,14 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy project files
 COPY . /app/
 
-# Expose port 8000
+# Make entrypoint script executable
+RUN chmod +x /app/entrypoint.sh
+
+# Expose port
 EXPOSE 8000
 
-# Run the Django development server
+# Set entrypoint
+ENTRYPOINT ["/app/entrypoint.sh"]
+
+# Default command
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

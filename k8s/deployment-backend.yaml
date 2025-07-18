@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: backend_backend:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DJANGO_DB_HOST
+              value: postgres-service
+            - name: DJANGO_DB_NAME
+              value: taskforge_db
+            - name: DJANGO_DB_USER
+              value: postgres
+            - name: DJANGO_DB_PASSWORD
+              value: postgres
+            - name: DJANGO_DB_PORT
+              value: "5432"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: backend
+  ports:
+    - port: 8000
+      targetPort: 8000
+      nodePort: 30007
+  type: NodePort
